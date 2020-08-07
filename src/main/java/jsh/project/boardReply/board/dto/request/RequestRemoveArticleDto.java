@@ -1,5 +1,5 @@
 package jsh.project.boardReply.board.dto.request;
 
-public class RequestRemoveArticle {
+public class RequestRemoveArticleDto {
 
 }
