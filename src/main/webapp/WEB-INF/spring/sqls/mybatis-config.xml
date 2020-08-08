@@ -5,10 +5,10 @@
 
 	<typeAliases>
 		<!-- Article 관련 -->
-		<typeAlias type="jsh.project.boardReply.board.domain.Article" alias="Article" />
+		<typeAlias type="jsh.project.boardReply.board.model.domain.Article" alias="Article" />
 
-		<!-- Article Reply 관련 -->
-		<typeAlias type="jsh.project.boardReply.reply.domain.Reply" alias="Reply" />
+		<!-- Reply 관련 -->
+		<typeAlias type="jsh.project.boardReply.reply.model.domain.Reply" alias="Reply" />
 
 	</typeAliases>
 

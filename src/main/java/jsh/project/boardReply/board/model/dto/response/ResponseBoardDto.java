@@ -1,4 +1,4 @@
-package jsh.project.boardReply.board.dto.response;
+package jsh.project.boardReply.board.model.dto.response;
 
 import java.util.List;
 

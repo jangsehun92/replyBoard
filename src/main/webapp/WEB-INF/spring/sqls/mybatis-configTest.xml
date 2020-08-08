@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 
-<configuration >
-	
-  <typeAliases>
-  	<!-- Article 관련 -->
-  	<typeAlias type="jsh.project.boardReply.article.domain.Article" alias="Article"/>
-  	
-  	<!-- Article Reply 관련 -->
-  	<!-- <typeAlias type="jsh.project.boardReply.reply.domain.Reply" alias="Reply"/> -->
-  	
-  </typeAliases>
+<configuration>
+
+	<typeAliases>
+		<!-- Article 관련 -->
+		<typeAlias type="jsh.project.boardReply.board.model.domain.Article" alias="Article" />
+
+		<!-- Reply 관련 -->
+		<typeAlias type="jsh.project.boardReply.reply.model.domain.Reply" alias="Reply" />
+
+	</typeAliases>
+
 </configuration>

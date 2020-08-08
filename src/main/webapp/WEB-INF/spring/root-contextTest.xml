@@ -22,6 +22,8 @@
 		</property>
 	</bean>
 	
+	<context:component-scan base-package="jsh.project.boardReply" />
+	
 	<!-- dataSource -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${driver}" />

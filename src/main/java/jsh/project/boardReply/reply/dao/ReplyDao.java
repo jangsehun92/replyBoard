@@ -2,8 +2,8 @@ package jsh.project.boardReply.reply.dao;
 
 import java.util.List;
 
-import jsh.project.boardReply.reply.domain.Reply;
-import jsh.project.boardReply.reply.dto.response.ResponseReplyDto;
+import jsh.project.boardReply.reply.model.domain.Reply;
+import jsh.project.boardReply.reply.model.dto.response.ResponseReplyDto;
 
 public interface ReplyDao {
 	public List<ResponseReplyDto> selectReplys(int articleId);

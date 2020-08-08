@@ -2,8 +2,8 @@ package jsh.project.boardReply.board.dao;
 
 import java.util.List;
 
-import jsh.project.boardReply.board.domain.Article;
-import jsh.project.boardReply.board.dto.response.ResponseArticleDto;
+import jsh.project.boardReply.board.model.domain.Article;
+import jsh.project.boardReply.board.model.dto.response.ResponseArticleDto;
 
 public interface BoardDao {
 	public int selectArticleTotalCount();
