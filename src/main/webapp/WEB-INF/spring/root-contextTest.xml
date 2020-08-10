@@ -22,7 +22,9 @@
 		</property>
 	</bean>
 	
-	<context:component-scan base-package="jsh.project.boardReply" />
+	<context:component-scan base-package="jsh.project.boardReply">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 	
 	<!-- dataSource -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">

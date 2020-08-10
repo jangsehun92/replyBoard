@@ -19,8 +19,7 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public int selectArticleTotalCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("boardMapper.selectTotalCount");
 	}
 
 	@Override
