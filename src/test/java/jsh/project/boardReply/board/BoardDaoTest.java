@@ -69,7 +69,34 @@ public class BoardDaoTest {
 		List<ResponseArticleDto> articls  = boardDao.selectArticles(paramMap);
 		
 		//then
+		assertNotNull(articls);
+	}
+	
+	@Test
+	public void 게시글_입력() {
+		//given
 		
+		//when
+		
+		//then
+	}
+	
+	@Test
+	public void 게시글_수정() {
+		//given
+		
+		//when
+		
+		//then
+	}
+	
+	@Test
+	public void 게시글_삭제() {
+		//given
+		
+		//when
+		
+		//then
 	}
 	
 }
