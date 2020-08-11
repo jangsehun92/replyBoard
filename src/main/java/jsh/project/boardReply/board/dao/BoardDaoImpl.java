@@ -1,6 +1,7 @@
 package jsh.project.boardReply.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -23,9 +24,8 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public List<ResponseArticleDto> selectArticles() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ResponseArticleDto> selectArticles(Map<String,Integer> paramMap) {
+		return sqlSession.selectList("boardMapper.selectArticles", paramMap);
 	}
 
 	@Override

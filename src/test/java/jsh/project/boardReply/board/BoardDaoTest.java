@@ -8,6 +8,10 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.junit.Before;
@@ -26,6 +30,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import jsh.project.boardReply.board.dao.BoardDaoImpl;
+import jsh.project.boardReply.board.model.dto.response.ResponseArticleDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-contextTest.xml")
@@ -51,6 +56,20 @@ public class BoardDaoTest {
 		
 		//then
 		assertThat(totalCount, is(56));
+	}
+	
+	@Test
+	public void 게시글_리스트_가져오기() {
+		//given
+		Map<String,Integer> paramMap = new HashMap<String,Integer>();
+		paramMap.put("startCount", 0);
+		paramMap.put("endCount",10);
+		
+		//when
+		List<ResponseArticleDto> articls  = boardDao.selectArticles(paramMap);
+		
+		//then
+		
 	}
 	
 }
