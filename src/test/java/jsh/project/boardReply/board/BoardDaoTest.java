@@ -50,7 +50,7 @@ public class BoardDaoTest {
 		totalCount = boardDao.selectArticleTotalCount();
 		
 		//then
-		assertThat(totalCount, is(73));
+		assertThat(totalCount, is(56));
 	}
 	
 }
