@@ -42,4 +42,21 @@
 		]]>
 	</select>
 	
+	<select id="selectArticle" parameterType="int" resultType="ResponseArticleDto">
+	
+	</select>
+	
+	<insert id="insertArticle" parameterType="Article">
+	
+	</insert>
+	
+	<update id="updateArticle" parameterType="Article">
+	
+	</update>
+	
+	<delete id="deleteArticle" parameterType="Article">
+	
+	</delete>
+	
+	
 </mapper>

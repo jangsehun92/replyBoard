@@ -29,27 +29,23 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public Article selectArticle(int articleId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseArticleDto selectArticle(int articleId) {
+		return sqlSession.selectOne("boardMapper.selectArticle", articleId);
 	}
 
 	@Override
 	public void insertArticle(Article article) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("boardMapper.insertArticle", article);
 	}
 
 	@Override
 	public void updateArticle(Article article) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("boardMapper.updateArticle", article);
 	}
 
 	@Override
 	public void deleteArticle(Article article) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("boardMapper.deleteArticle", article);
 	}
 
 }

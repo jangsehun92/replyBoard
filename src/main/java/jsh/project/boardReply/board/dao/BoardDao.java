@@ -9,7 +9,7 @@ import jsh.project.boardReply.board.model.dto.response.ResponseArticleDto;
 public interface BoardDao {
 	public int selectArticleTotalCount();
 	public List<ResponseArticleDto> selectArticles(Map<String,Integer> paramMap);
-	public Article selectArticle(int articleId);
+	public ResponseArticleDto selectArticle(int articleId);
 	public void insertArticle(Article article);
 	public void updateArticle(Article article);
 	public void deleteArticle(Article article);

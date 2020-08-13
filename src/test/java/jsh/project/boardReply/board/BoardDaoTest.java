@@ -30,6 +30,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import jsh.project.boardReply.board.dao.BoardDaoImpl;
+import jsh.project.boardReply.board.model.domain.Article;
+import jsh.project.boardReply.board.model.dto.request.RequestCreateArticleDto;
+import jsh.project.boardReply.board.model.dto.request.RequestEditArticleDto;
+import jsh.project.boardReply.board.model.dto.request.RequestRemoveArticleDto;
 import jsh.project.boardReply.board.model.dto.response.ResponseArticleDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -75,8 +79,14 @@ public class BoardDaoTest {
 	@Test
 	public void 게시글_입력() {
 		//given
+		Article article;
+		RequestCreateArticleDto dto = new RequestCreateArticleDto();
+		dto.setTitle("insertTest");
+		dto.setContent("insertTest");
+		article = dto.toArticle();
 		
 		//when
+		boardDao.insertArticle(article);
 		
 		//then
 	}
@@ -84,8 +94,15 @@ public class BoardDaoTest {
 	@Test
 	public void 게시글_수정() {
 		//given
+		Article article;
+		RequestEditArticleDto dto = new RequestEditArticleDto();
+		dto.setId(1);
+		dto.setTitle("insertTest");
+		dto.setContent("insertTest");
+		article = dto.toArticle();
 		
 		//when
+		boardDao.updateArticle(article);
 		
 		//then
 	}
@@ -93,8 +110,13 @@ public class BoardDaoTest {
 	@Test
 	public void 게시글_삭제() {
 		//given
+		Article article;
+		RequestRemoveArticleDto dto = new RequestRemoveArticleDto();
+		dto.setId(1);
+		article = dto.toArticle();
 		
 		//when
+		boardDao.deleteArticle(article);
 		
 		//then
 	}
