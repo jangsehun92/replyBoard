@@ -6,9 +6,7 @@
 		SELECT
 			count(id)
 		FROM
-			article_table
-		WHERE 
-			article_table.category = 'community'
+			board_table
 	</select>
 	
 	<select id="selectArticles" parameterType="map" resultType="ResponseArticleDto">
@@ -43,19 +41,36 @@
 	</select>
 	
 	<select id="selectArticle" parameterType="int" resultType="ResponseArticleDto">
-	
+		
 	</select>
 	
 	<insert id="insertArticle" parameterType="Article">
-	
+		INSERT INTO
+			board_table
+		VALUES(
+			board_seq.nextval,
+			#{title},
+			#{content},
+			#{regdate}
+		)
 	</insert>
 	
 	<update id="updateArticle" parameterType="Article">
-	
+		UPDATE 
+			board_table
+		SET	
+			title = #{title},
+			content = #{content}
+		WHERE
+			id = #{id}
 	</update>
 	
 	<delete id="deleteArticle" parameterType="Article">
-	
+		DELETE
+		FROM
+			board_table
+		WHERE
+			id = #{id}
 	</delete>
 	
 	

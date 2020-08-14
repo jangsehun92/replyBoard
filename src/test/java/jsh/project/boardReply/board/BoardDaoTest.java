@@ -14,11 +14,14 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
@@ -29,7 +32,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import jsh.project.boardReply.board.dao.BoardDaoImpl;
+import jsh.project.boardReply.board.dao.BoardDao;
 import jsh.project.boardReply.board.model.domain.Article;
 import jsh.project.boardReply.board.model.dto.request.RequestCreateArticleDto;
 import jsh.project.boardReply.board.model.dto.request.RequestEditArticleDto;
@@ -43,7 +46,7 @@ public class BoardDaoTest {
 	private static final Logger log = LoggerFactory.getLogger(BoardDaoTest.class);
 	
 	@Autowired
-	private BoardDaoImpl boardDao;
+	private BoardDao boardDao;
 	
 	@Before
 	public void before() {
@@ -53,13 +56,13 @@ public class BoardDaoTest {
 	@Test
 	public void 게시글_총_갯수_가져오기() {
 		//given
-		int totalCount = 0;
+		int totalCount;
 		
 		//when
 		totalCount = boardDao.selectArticleTotalCount();
 		
 		//then
-		assertThat(totalCount, is(56));
+		assertThat(totalCount, is(0));
 	}
 	
 	@Test

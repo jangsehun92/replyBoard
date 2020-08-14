@@ -8,7 +8,6 @@
 		<typeAlias type="jsh.project.boardReply.board.model.domain.Article" alias="Article" />
 		<typeAlias type="jsh.project.boardReply.board.model.dto.response.ResponseArticleDto" alias="ResponseArticleDto" />
 		
-
 		<!-- Reply 관련 -->
 		<typeAlias type="jsh.project.boardReply.reply.model.domain.Reply" alias="Reply" />
 
