@@ -24,7 +24,7 @@ public class BoardServiceImpl implements BoardService{
 	public ResponseBoardDto getArticles(int page) {
 		Pagination pagination = new Pagination(boardDao.selectArticleTotalCount(), page);
 		ResponseBoardDto dto = new ResponseBoardDto();
-		dto.setArticles(boardDao.selectArticles(pagination.getResultMap()));
+		dto.setArticles(boardDao.selectArticles(pagination.getSearchScopeMap()));
 		dto.setPagination(pagination);
 		return dto;
 	}

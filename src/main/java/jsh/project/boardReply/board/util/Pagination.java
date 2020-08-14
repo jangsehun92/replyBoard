@@ -43,9 +43,9 @@ public class Pagination {
 	public void init() {
 		totalPage = (totalCount / countList);
 		/*
-		총 게시글(totalCount)를 한페이지당 보여줄 게시글 수(countList)로 나눴을때 나머지가 0 보다크다는것은
-		게시글이 최소 1개이상 더 있다는 뜻이므로, 전체페이지를 하나더 추가해줘야함
-		*/
+		 *총 게시글(totalCount)를 한페이지당 보여줄 게시글 수(countList)로 나눴을때 나머지가 0 보다크다는것은
+		 *게시글이 최소 1개이상 더 있다는 뜻이므로, 전체페이지를 하나더 추가해줘야함
+		 */
 		if(totalCount % countList > 0) {
 			totalPage++;
 		}
@@ -74,7 +74,7 @@ public class Pagination {
 		endCount = page * countList;
 	}
 	
-	public Map<String, Integer> getResultMap(){
+	public Map<String, Integer> getSearchScopeMap(){
 		Map<String, Integer> resultMap = new HashMap<String, Integer>();
 		resultMap.put("startCount", startCount);
 		resultMap.put("endCount", endCount);

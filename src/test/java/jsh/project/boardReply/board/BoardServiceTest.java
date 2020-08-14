@@ -1,26 +1,19 @@
 package jsh.project.boardReply.board;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import jsh.project.boardReply.board.dao.BoardDao;
 import jsh.project.boardReply.board.model.dto.request.RequestCreateArticleDto;
@@ -28,11 +21,7 @@ import jsh.project.boardReply.board.model.dto.request.RequestEditArticleDto;
 import jsh.project.boardReply.board.model.dto.request.RequestRemoveArticleDto;
 import jsh.project.boardReply.board.model.dto.response.ResponseArticleDto;
 import jsh.project.boardReply.board.model.dto.response.ResponseBoardDto;
-import jsh.project.boardReply.board.service.BoardService;
 import jsh.project.boardReply.board.service.BoardServiceImpl;
-
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BoardServiceTest {
