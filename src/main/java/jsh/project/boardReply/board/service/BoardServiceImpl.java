@@ -1,11 +1,15 @@
 package jsh.project.boardReply.board.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import jsh.project.boardReply.board.dao.BoardDao;
 import jsh.project.boardReply.board.model.domain.Article;
+import jsh.project.boardReply.board.model.dto.request.RequestCreateArticleDto;
+import jsh.project.boardReply.board.model.dto.request.RequestEditArticleDto;
+import jsh.project.boardReply.board.model.dto.request.RequestRemoveArticleDto;
+import jsh.project.boardReply.board.model.dto.response.ResponseArticleDto;
+import jsh.project.boardReply.board.model.dto.response.ResponseBoardDto;
+import jsh.project.boardReply.board.util.Pagination;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -17,33 +21,36 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Article> getArticles() {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseBoardDto getArticles(int page) {
+		Pagination pagination = new Pagination(boardDao.selectArticleTotalCount(), page);
+		ResponseBoardDto dto = new ResponseBoardDto();
+		dto.setArticles(boardDao.selectArticles(pagination.getResultMap()));
+		dto.setPagination(pagination);
+		return dto;
 	}
 
 	@Override
-	public Article getArticle(int articleId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseArticleDto getArticle(int articleId) {
+		return boardDao.selectArticle(articleId);
 	}
 
 	@Override
-	public int createArticle() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int createArticle(RequestCreateArticleDto dto) {
+		Article article = dto.toArticle();
+		boardDao.insertArticle(article);
+		return article.getId();
 	}
 
 	@Override
-	public int editArticle() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int editArticle(RequestEditArticleDto dto) {
+		Article article = dto.toArticle();
+		boardDao.updateArticle(article);
+		return article.getId();
 	}
 
 	@Override
-	public void removeArticle() {
-		// TODO Auto-generated method stub
-		
+	public void removeArticle(RequestRemoveArticleDto dto) {
+		boardDao.deleteArticle(dto.toArticle());
 	}
 
 }
