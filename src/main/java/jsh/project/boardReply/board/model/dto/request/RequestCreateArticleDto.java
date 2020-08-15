@@ -4,11 +4,20 @@ import jsh.project.boardReply.board.model.domain.Article;
 import jsh.project.boardReply.board.model.domain.Article.ArticleConverter;
 
 public class RequestCreateArticleDto implements ArticleConverter{
+	private String writer;
 	private String title;
 	private String content;
 	
 	public RequestCreateArticleDto() {
 		
+	}
+	
+	public String getWriter() {
+		return writer;
+	}
+	
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	
 	public String getTitle() {
@@ -34,7 +43,7 @@ public class RequestCreateArticleDto implements ArticleConverter{
 	
 	@Override
 	public String toString() {
-		return "RequestCreateArticleDto { title : + " + title + " content : " + content + " }";
+		return "RequestCreateArticleDto { writer : " + writer + " + title : + " + title + " content : " + content + " }";
 	}
 
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="/WEB-INF/views/commonPages/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	replyList("${responseDto.id}");
+	replyList("${responseArticleDto.id}");
 });
 
 function articleDeleteConfirm(id){
@@ -50,7 +51,7 @@ function articleDelete(id){
 // 댓글 리스트 불러오기
 function replyList(id){
 	$.ajax({
-		url:"/replys/${responseDto.id}",
+		url:"/replys/${responseArticleDto.id}",
 		type:"GET",
 		contentType : "application/json; charset=UTF-8",
 		dataType: "JSON",
@@ -78,7 +79,7 @@ function replyList(id){
 							 "<div style='position: relative; height: 100%'>"+
 							  	"<div>"+
 									"<div>"+
-										"<span>"+"닉네임"+"</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
+										"<span>"+value.writer+"</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
 								if(value.enabled != 0){
 									html +=	"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
 													"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
@@ -123,7 +124,7 @@ function replyCreate(){
 	
 	//대댓글 관련 수정필요
 	var requestReplyCreateDto = {
-			articleId : "${responseDto.id}",
+			articleId : "${responseArticleDto.id}",
 			content : $("#replyContent").val(),
 	}
 	
@@ -134,7 +135,7 @@ function replyCreate(){
 		data: JSON.stringify(requestReplyCreateDto), 
 		
 		success:function(data){
-			replyList("${responseDto.id}");
+			replyList("${responseArticleDto.id}");
 		},
 		error:function(request,status,error){
 			jsonValue = jQuery.parseJSON(request.responseText);
@@ -177,7 +178,7 @@ function replyUpdate(id){
 	
 	var requestReplyUpdateDto = {
 		id : id,
-		articleId : "${responseDto.id}",	
+		articleId : "${responseArticleDto.id}",	
 		content : $("#replyContent-"+id).val()
 	}
 	
@@ -187,7 +188,7 @@ function replyUpdate(id){
 		contentType : "application/json; charset=UTF-8",
 		data: JSON.stringify(requestReplyUpdateDto), 
 		success:function(data){
-			replyList("${responseDto.id}");
+			replyList("${responseArticleDto.id}");
 		},
 		error:function(request,status,error){
 			jsonValue = jQuery.parseJSON(request.responseText);
@@ -210,7 +211,7 @@ function deleteConfirm(id){
 // 댓글 삭제 
 function replyDelete(id){
 	var requestReplyDeleteDto = {
-		id : id,
+		id : id
 	}
 	
 	$.ajax({
@@ -220,7 +221,7 @@ function replyDelete(id){
 		data: JSON.stringify(requestReplyDeleteDto),
 		success:function(data){
 			alert("댓글이 삭제되었습니다.");
-			replyList("${responseDto.id}");
+			replyList("${responseArticleDto.id}");
 		},
 		error:function(request,status,error){
 			jsonValue = jQuery.parseJSON(request.responseText);
@@ -252,83 +253,44 @@ function listConfirm(id){
 }
 </script>
 <body>
-<input type="hidden" id ="category" value="${responseDto.category }">
 <div id="container" class="container" style="margin-top: 50px">
-	<input type="hidden" id ="likeCheck" value="${responseDto.likeCheck }">
 	<div class="header">
 		<h2>글보기</h2>
 		<hr>
 			<ul class="list-group">
 				<li class="list-group-item">
 					<div class="title">
-						<h3>${responseDto.title }</h3>
+						<h3>${responseArticleDto.title }</h3>
 					</div>
 					<div class="row" >
 						<div class="col-md-4" style="float: left">
-							<span><a href="/account/info/${responseDto.accountId }">${responseDto.nickname }</a> </span> <span style="margin-left: 10px"><small><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${responseDto.regdate }"/> 작성
-							<c:if test="${responseDto.modifyDate != null }">
-								᛫ <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${responseDto.modifyDate }"/>수정
-							</c:if>
-							</small></span>
+							<span>${responseArticleDto.writer } </span> 
+							<span style="margin-left: 10px"><small><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${responseArticleDto.regdate }"/> 작성 </small></span>
 						</div>
 						<div style="float: right">
-							<small><span style="margin-right: 10px">조회 ${responseDto.viewCount }</span></small> <small >댓글<span id = "replyCount" style="margin-right: 10px">${responseDto.replyCount }</span> </small><small >추천<span id = "likeCount" style="margin-right: 10px">${responseDto.likeCount }</span> </small>
+							<small >댓글<span id = "replyCount" style="margin-right: 10px">${responseArticleDto.replyCount }</span> </small>
 						</div>
 					</div>
 				</li>
 				<li class="list-group-item">
 					<div>
-						<div id="board_content" style="white-space : pre-wrap;height: 100%">${responseDto.content }</div>
+						<div id="board_content" style="white-space : pre-wrap;height: 100%">${responseArticleDto.content }</div>
 					</div>
 				</li>
 			</ul>
 			<div class="row" style="margin-left: 0px; margin-right: 0px">
 					<div style="float: left">
 						<div class="btn-group">
-							<a href="/articles/${responseDto.category }" class="btn btn-primary">목록 </a>
 <!-- 글 수정,삭제 버튼 -->
-							<c:if test="${principal.id eq responseDto.accountId}">
-								<input type="button" class="btn btn-primary" value="수정" onclick="document.getElementById('article-edit-form').submit();">
-								<input type="button" class="btn btn-primary" value="삭제" onclick="articleDeleteConfirm(${responseDto.id});" >
-							</c:if> 
-							<c:if test="${principal.id != responseDto.accountId}">
-								<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<input type="button" class="btn btn-primary" value="수정" onclick="document.getElementById('article-edit-form').submit();">
-									<input type="button" class="btn btn-primary" value="삭제" onclick="articleDeleteConfirm(${responseDto.id});">
-								</sec:authorize>
-							</c:if>
+								<input type="button" class="btn btn-primary" value="수정" onclick="location.href='/article/edit/${responseArticleDto.id}';">
+								<input type="button" class="btn btn-primary" value="삭제" onclick="articleDeleteConfirm(${responseArticleDto.id});" >
 						</div>
 					</div>
-				<form method="post" action="/article/edit/${responseDto.id }" id="article-edit-form">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<input type="hidden" name="id" value="${responseDto.id }">
-					<input type="hidden" name="accountId" value="${responseDto.accountId }">
-				</form>
-<!-- 추천버튼 -->
-				<div style="float: right">
-					<sec:authorize access="isAuthenticated()">
-						<c:choose>
-							<c:when test="${responseDto.likeCheck == 'true'}">
-								<input type="button" class="btn btn-primary" id="like" value="추천 취소" onclick="like(${principal.id})">
-							</c:when>
-								<c:otherwise>
-								<input type="button" class="btn btn-primary" id="like" value="추천 하기" onclick="like(${principal.id})">
-							</c:otherwise>
-						</c:choose>
-					</sec:authorize>
-					<sec:authorize access="isAnonymous()">
-						<input type="button" class="btn btn-primary" id="like" value="추천 하기" onclick="login();">
-					</sec:authorize>
-				</div>
 			</div>
 		<hr >
 <!-- 댓글 입력란 -->
 			<div class="form-group shadow-textarea">
-					<c:if test="${principal == null}">
-						<span>로그인을 하시면 댓글을 등록할 수 있습니다. <a href="/login">[로그인]</a></span>
-					</c:if>
-					<sec:authorize access="isAuthenticated()">
-						<label>댓글</label>
+					<label>댓글</label>
 						<div style="position: relative; height: 100%">
 							<div>
 							<form method="post" action="/reply" onsubmit="return replyCreate();">
@@ -337,11 +299,10 @@ function listConfirm(id){
 							</form>
 							</div>
 						</div>
-					</sec:authorize>
 			</div>
 <!-- 새로고침(댓글) -->			
 			<hr>
-				<input type="button" class="btn btn-default" value="새로고침" onclick="listConfirm(${responseDto.id});">
+				<input type="button" class="btn btn-default" value="새로고침" onclick="listConfirm(${responseArticleDto.id});">
 <!-- 댓글 리스트 -->
 			<div>
 				<ul class="list-group" id="replyList">

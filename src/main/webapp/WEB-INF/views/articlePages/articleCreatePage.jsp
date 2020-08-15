@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/commonPages/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,35 +26,10 @@ $(document).ready(function() {
 	        minHeight: null,
 	        maxHeight: null,
 	        focus: true, 
-	        lang : 'ko-KR',
-	        callbacks: {
-	        	//이미지가 올라오면 여기로 온다.
-	        	onImageUpload : function(files){
-	        		for (var i = 0; i < files.length; i++) {
-	        		//해당 파일을 서버에 보내 저장한 후 저장한다.
-	        			uploadSummernoteImageFile(files[i],this);
-	        		}
-	        	}
-	        }
+	        lang : 'ko-KR'
 	  });
 });
 
-function uploadSummernoteImageFile(file, editor) {
-	data = new FormData();
-	data.append("file", file);
-	$.ajax({
-		data : data,
-		type : "POST",
-		url : "/article/image",
-		contentType : false,
-		processData : false,
-		success : function(data) {
-        	//editor에 저장된 이미지를 가져와 보여줘야하기 때문에 항상 업로드된 파일의 url이 있어야 한다.
-        	console.log(data);
-			$(editor).summernote('insertImage',data);
-		}
-	});
-}
 function check_form(){
 	var inputForm_content = $("#content").val().replace(/\s|/gi,'');
 	

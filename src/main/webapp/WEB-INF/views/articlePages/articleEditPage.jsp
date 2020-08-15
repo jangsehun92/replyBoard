@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/commonPages/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,43 +29,13 @@ $(document).ready(function() {
 	        minHeight: null,
 	        maxHeight: null,
 	        focus: true, 
-	        lang : 'ko-KR',
-	        callbacks: {
-	        	//이미지가 올라오면 여기로 온다.
-	        	onImageUpload : function(files){
-	        		for (var i = 0; i < files.length; i++) {
-	        		//해당 파일을 서버에 보내 저장한 후 저장한다.
-	        			uploadSummernoteImageFile(files[i],this);
-	        		}
-	        	}
-	        }
+	        lang : 'ko-KR'
 	  });
-	  $('#content').summernote('code', '${responseDto.content}');
+	  $('#content').summernote('code', '${responseArticleDto.content}');
 });
-
-function uploadSummernoteImageFile(file, editor) {
-	data = new FormData();
-	data.append("file", file);
-	$.ajax({
-		data : data,
-		type : "POST",
-		url : "/article/image",
-		contentType : false,
-		processData : false,
-		success : function(data) {
-        	//editor에 저장된 이미지를 가져와 보여줘야하기 때문에 항상 업로드된 파일의 url이 있어야 한다.
-			$(editor).summernote('insertImage',data);
-		}
-	});
-}
 
 function check_form(){
 	var inputForm_content = $("#content").val().replace(/\s|/gi,'');
-	var importance = $("#select_importance option:selected").val();
-	
-	if(importance==null){
-		importance = "일반";
-	}
 	
 	if(inputForm_content==""){
 		alert("내용을 입력해주세요.");
@@ -74,18 +45,18 @@ function check_form(){
 	}
 	
 	var requestArticleEditDto = {
-			id : "${responseDto.id}",
+			id : "${responseArticleDto.id}",
 			title : $("#title").val(),
 			content : $("#content").val()
 		}
 	
 	$.ajax({
-		url:"/article/${responseDto.id}",
+		url:"/article/${responseArticleDto.id}",
 		type:"patch",
 		contentType : "application/json; charset=UTF-8",
 		data: JSON.stringify(requestArticleEditDto),
 		success:function(data){
-			location.href = "/article/${responseDto.id}";
+			location.href = "/article/${responseArticleDto.id}";
 		},
 		error:function(request,status,error){
 			jsonValue = jQuery.parseJSON(request.responseText);
@@ -106,7 +77,10 @@ function check_form(){
 		<h2>게시글 수정</h2>
 			<table class="table table-bordered" >
 				<tr>
-					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50" value="${responseDto.title }"></td>
+					<td><input id="writer" name="writer" type="text" class="form-control" placeholder="작성자" maxlength="50" value="${responseArticleDto.writer }" readonly="readonly"></td>
+				</tr>
+				<tr>
+					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50" value="${responseArticleDto.title }"></td>
 				</tr>
 				<tr>
 					<td><textarea id="content" name="content" class="form-control" placeholder="내용" onkeydown="resize(this)"></textarea>
@@ -114,7 +88,7 @@ function check_form(){
 			</table>
 		<div style="float: right">
 			<div class="btn-group">
-				<input type="button" class="btn btn-primary" value="취소" onclick="location.href='/article/${responseDto.id}'">
+				<input type="button" class="btn btn-primary" value="취소" onclick="location.href='/article/${responseArticleDto.id}'">
 				<input type="button" class="btn btn-primary" value="완료" onclick="check_form();">
 			</div>
 		</div>

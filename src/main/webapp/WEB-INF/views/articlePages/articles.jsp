@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/views/commonPages/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<td class="col-md-9"><b>제목</b></td>
+						<td class="col-md-8"><b>제목</b></td>
+						<td class="col-md-1"><b>작성자</b></td>
 						<td class="col-md-1" align="right"><b>작성 날짜</b></td>
 					</tr>
 				</thead>
@@ -41,6 +43,7 @@
 						<c:forEach items="${responseBoardDto.articles }" var="article">
 								<tr>
 									<td><a href="/article/${article.id }">${article.title } (${article.replyCount })</a></td>
+									<td>${article.writer }</td>
 									<td align="right"><small><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${article.regdate }"/></small></td>
 								</tr>
 						</c:forEach>

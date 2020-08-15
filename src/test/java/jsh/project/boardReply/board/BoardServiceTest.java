@@ -72,6 +72,7 @@ public class BoardServiceTest {
 	public void 게시글_입력() {
 		// given
 		RequestCreateArticleDto dto = new RequestCreateArticleDto();
+		dto.setWriter("tester");
 		dto.setTitle("insertTest");
 		dto.setContent("insertTest");
 

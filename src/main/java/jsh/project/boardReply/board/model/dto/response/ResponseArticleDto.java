@@ -5,6 +5,7 @@ import java.util.Date;
 public class ResponseArticleDto {
 	
 	private int id;
+	private String writer;
 	private String title;
 	private String content;
 	private int replyCount;
@@ -20,6 +21,14 @@ public class ResponseArticleDto {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getWriter() {
+		return writer;
+	}
+	
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public String getTitle() {
