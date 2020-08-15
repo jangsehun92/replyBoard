@@ -16,7 +16,7 @@ public class Pagination {
 	private int page;		//현재 페이지 값 
 	private int totalPage;	//하단에 표시할 총 페이지 값 
 	private int startPage;	//하단에 표시 될 첫번째 값
-	private int endPage;	//하단에 표시 될 마지막 값
+	private int endPage;	//하단에 표시 될 마지막 값 
 	
 	public Pagination(int totalCount, int page) {
 		this.totalCount = totalCount;

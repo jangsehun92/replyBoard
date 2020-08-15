@@ -50,6 +50,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void removeArticle(RequestRemoveArticleDto dto) {
+		//해당 글의 댓글 삭제 필요
 		boardDao.deleteArticle(dto.toArticle());
 	}
 

@@ -20,14 +20,14 @@ public class BoardController {
 	
 	@RequestMapping("/")
 	public String root() {
-		return "home";
+		return "redirect:/articles/1";
 	}
 	
 	// 게시글 리스트 가져오기
-	@GetMapping("/board/{page}")
+	@GetMapping("/articles/{page}")
 	public String articleList(@PathVariable("page") int page, Model model) {
-		model.addAttribute("articles",boardService.getArticles(page));
-		return "";
+		model.addAttribute("responseBoardDto",boardService.getArticles(page));
+		return "articlePages/articles";
 	}
 	
 	// 단일 게시글 가져오기
