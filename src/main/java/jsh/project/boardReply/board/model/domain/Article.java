@@ -8,11 +8,13 @@ import jsh.project.boardReply.board.model.dto.request.RequestRemoveArticleDto;
 
 public class Article {
 	private int id;
+	private String writer;
 	private String title;
 	private String content;
 	private Date regdate;
 	
 	public Article(RequestCreateArticleDto dto) {
+		this.writer = dto.getWriter();
 		this.title = dto.getTitle();
 		this.content = dto.getContent();
 		this.regdate = new Date();
@@ -31,6 +33,10 @@ public class Article {
 	public int getId() {
 		return id;
 	}
+	
+	public String getWriter() {
+		return writer;
+	}
 
 	public String getTitle() {
 		return title;
@@ -46,7 +52,7 @@ public class Article {
 	
 	@Override
 	public String toString() {
-		return "Article { id : " + id + " title : " + title + " content : " + content + " regdate : " + regdate + " }";
+		return "Article { id : " + id + " writer : + " + writer + " title : " + title + " content : " + content + " regdate : " + regdate + " }";
 	}
 	
 	public interface ArticleConverter{

@@ -36,7 +36,7 @@ function articleDelete(id){
 		type:"delete",
 		contentType : "application/json; charset=UTF-8",
 		success:function(data){
-			location.href="/articles";
+			location.href="/";
 		},
 		error:function(request,status,error){
 			jsonValue = jQuery.parseJSON(request.responseText);

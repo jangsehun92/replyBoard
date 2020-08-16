@@ -41,6 +41,7 @@ function check_form(){
 	}
 	
 	var requestArticleCreateDto = {
+			writer : $("#writer").val(),
 			title : $("#title").val(),
 			content : $("#content").val(),
 		}
@@ -71,6 +72,9 @@ function check_form(){
 	<div class="form">
 		<h2>게시글 작성</h2>
 			<table class="table table-bordered">
+				<tr>
+					<td><input id="writer" name="writer" type="text" class="form-control" placeholder="작성자" maxlength="10"></td>
+				</tr>
 				<tr>
 					<td><input id="title" name="title" type="text" class="form-control" placeholder="제목" maxlength="50"></td>
 				</tr>

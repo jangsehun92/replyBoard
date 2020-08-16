@@ -53,7 +53,9 @@
 			board_table.regdate
 		FROM
 			board_table LEFT JOIN board_reply_table ON board_table.id = board_reply_table.article_id
+		WHERE board_table.id = #{articleId}
 		GROUP BY board_table.id, board_table.writer, board_table.title, board_table.content, board_table.regdate
+		
 	</select>
 	
 	<insert id="insertArticle" parameterType="Article">
