@@ -28,12 +28,12 @@ public class BoardController {
 	
 	@RequestMapping("/")
 	public String root() {
-		return "redirect:/articles/1";
+		return "redirect:/articles?page=1";
 	}
 	
 	// 게시글 리스트 가져오기
-	@GetMapping("/articles/{page}")
-	public String articleList(@PathVariable("page") int page, Model model) {
+	@GetMapping("/articles")
+	public String articleList(int page, Model model) {
 		model.addAttribute("responseBoardDto",boardService.getArticles(page));
 		return "articlePages/articles";
 	}

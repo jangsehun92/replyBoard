@@ -5,13 +5,13 @@ $(function(){
 	var endPage = $("#endPage").val(); 
 	
 	if((Number(startPage)) > 1){
-		$("#pagination").append("<li class=''><a href='/articles/1' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
+		$("#pagination").append("<li class=''><a href='/articles?page=1' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
 	}else{
 		$("#pagination").append("<li class='disabled'><a href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
 	}
 	
 	if((Number(page)) > 1){
-		$("#pagination").append("<li class=''><a href='/articles/?page="+(page-1)+"' aria-label='Previous'><span aria-hidden='true'>&lang;</span></a></li>");
+		$("#pagination").append("<li class=''><a href='/articles?page="+(page-1)+"' aria-label='Previous'><span aria-hidden='true'>&lang;</span></a></li>");
 	}else{
 		$("#pagination").append("<li class='disabled'><a href='#' aria-label='Previous'><span aria-hidden='true'>&lang;</span></a></li>");
 	}
