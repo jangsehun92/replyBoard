@@ -2,4 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="replyMapper">
 
+	<select id="selectReplys" parameterType="int" resultType="ResponseReplyDto">
+		SELECT 
+			 
+		FROM 
+			board_reply_table 
+		WHERE article_id = 1 
+		ORDER BY reply_group, reply_group_order
+	</select>
+	
+	<select id="selectGroupCount" parameterType="int">
+		SELECT 
+			count(DISTINCT reply_group) 
+		FROM 
+			board_reply_table 
+		WHERE article_id = #{articleId};
+	</select>
+	
+	<select id="selectGroupOrderCount" parameterType="int">
+		SELECT
+			count(id)
+		FROM
+			board_reply_table
+		WHERE
+			reply_group = #{group}
+	</select>
+	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO
+			board_reply_table
+		VALUES(
+			board_reply_seq.nextval,
+			#{articleId},
+			#{replyGroup},
+			#{replyGroupOrder},
+			#{depth},
+			#{content},
+			#{enabled},
+			#{regdate}
+		)
+	</insert>
+	
+	<update id="updateReply" parameterType="Reply">
+		UPDATE
+			board_reply_table
+		SET
+			content = #{content}
+		WHERE
+			id = #{id}
+	</update>
+	
+	<delete id="deleteReply" parameterType="Reply">
+		DELETE
+		FROM
+			board_reply_table
+		WHERE
+			id = #{id}
+	</delete>
+
 </mapper>

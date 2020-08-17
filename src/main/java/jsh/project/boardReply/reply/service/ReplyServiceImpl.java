@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import jsh.project.boardReply.reply.dao.ReplyDao;
+import jsh.project.boardReply.reply.model.domain.Reply;
 import jsh.project.boardReply.reply.model.dto.request.RequestCreateReplyDto;
 import jsh.project.boardReply.reply.model.dto.request.RequestEditReplyDto;
 import jsh.project.boardReply.reply.model.dto.request.RequestRemoveReplyDto;
@@ -21,14 +22,22 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Override
 	public List<ResponseReplyDto> getReplys(int articleId) {
-		// TODO Auto-generated method stub
-		return null;
+		return replyDao.selectReplys(articleId);
 	}
 
 	@Override
 	public void createReplys(RequestCreateReplyDto dto) {
-		// TODO Auto-generated method stub
+		if(dto.getReplyGroup() != 0) {
+			dto.setReplyGroupOrder(replyDao.selectGroupOrderCount(dto.getReplyGroup())+1);
+			dto.setDepth(1);
+		}else {
+			dto.setReplyGroup(replyDao.selectGroupCount(dto.getArticleId())+1);
+			dto.setReplyGroupOrder(1);
+			dto.setDepth(0);
+		}
+		Reply reply = dto.toReply();
 		
+		replyDao.insertReplys(reply);
 	}
 
 	@Override

@@ -19,13 +19,22 @@ public class ReplyDaoImpl implements ReplyDao{
 
 	@Override
 	public List<ResponseReplyDto> selectReplys(int articleId) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("selectReplys",articleId);
+	}
+	
+	@Override
+	public int selectGroupCount(int articleId) {
+		return sqlSession.selectOne("selectGroupCount",articleId);
+	}
+	
+	@Override
+	public int selectGroupOrderCount(int group) {
+		return sqlSession.selectOne("selectGroupOrderCount", group);
 	}
 
 	@Override
 	public void insertReplys(Reply reply) {
-		// TODO Auto-generated method stub
+		sqlSession.insert("insertReply",reply);
 		
 	}
 
@@ -40,5 +49,6 @@ public class ReplyDaoImpl implements ReplyDao{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

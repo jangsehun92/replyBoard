@@ -10,6 +10,7 @@
 		
 		<!-- Reply 관련 -->
 		<typeAlias type="jsh.project.boardReply.reply.model.domain.Reply" alias="Reply" />
+		<typeAlias type="jsh.project.boardReply.reply.model.dto.response.ResponseReplyDto" alias="ResponseReplyDto" />
 
 	</typeAliases>
 

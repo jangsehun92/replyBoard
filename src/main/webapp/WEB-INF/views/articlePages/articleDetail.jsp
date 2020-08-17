@@ -79,9 +79,10 @@ function replyList(id){
 							 "<div style='position: relative; height: 100%'>"+
 							  	"<div>"+
 									"<div>"+
-										"<span>"+value.writer+"</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
+										"<span>익명</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
 								if(value.enabled != 0){
 									html +=	"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
+													"<a onClick='replyToReplyForm("+value.replyGroup+")'>답글</a> ᛫ "+
 													"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
 													"<a onClick='deleteConfirm("+value.id+")'>삭제</a>";
 								}
@@ -98,6 +99,13 @@ function replyList(id){
 											"<input type='button' style='width:50%' class='btn btn-primary' value='취소' onclick='replyForm("+value.id+")'>"+
 											"</form>"+
 									"</div>"+
+									"<div id='replyToReplyForm-"+value.id+"' style='display: none;'>"+
+									"<form method='post' action='/reply' onsubmit='return replyToReply("+responseArticleDto.id+");'>"+
+										"<textarea id='replyContent-"+value.replyGroup+"' name='content' class='form-control z-depth-1' rows='3' maxlength='1000' placeholder='댓글을 입력해주세요.'></textarea>"+
+										"<input type='submit' style='width:50%' class='btn btn-success' value='입력'>"+
+										"<input type='button' style='width:50%' class='btn btn-primary' value='취소' onclick='replyForm("+value.id+")'>"+
+										"</form>"+
+								"</div>"+
 								"</div>"+
 							"</div>"+
 						"</li>";
@@ -115,6 +123,7 @@ function replyList(id){
 function replyCreate(){
 	var content = $("#replyContent").val().replace(/\s|/gi,'');
 	
+	
 	if(content==""){
 		alert("댓글을 입력해주세요.");
 		$("#replyContent").val("");
@@ -125,7 +134,8 @@ function replyCreate(){
 	//대댓글 관련 수정필요
 	var requestReplyCreateDto = {
 			articleId : "${responseArticleDto.id}",
-			content : $("#replyContent").val(),
+			replyGroup : 0,
+			content : $("#replyContent").val()
 	}
 	
 	$.ajax({
@@ -134,6 +144,32 @@ function replyCreate(){
 		contentType : "application/json; charset=UTF-8",
 		data: JSON.stringify(requestReplyCreateDto), 
 		
+		success:function(data){
+			replyList("${responseArticleDto.id}");
+		},
+		error:function(request,status,error){
+			jsonValue = jQuery.parseJSON(request.responseText);
+			code = jsonValue.code;
+			console.log("errorCode : " + code);
+			alert(jsonValue.message);
+		}
+	});
+	return false;
+}
+
+function replyUpdate(id){
+	
+	var requestReplyCreateDto = {
+		id : id,
+		articleId : "${responseArticleDto.id}",	
+		content : $("#replyContent-"+id).val()
+	}
+	
+	$.ajax({
+		url:"/reply/"+id,
+		type:"post",
+		contentType : "application/json; charset=UTF-8",
+		data: JSON.stringify(requestReplyUpdateDto), 
 		success:function(data){
 			replyList("${responseArticleDto.id}");
 		},

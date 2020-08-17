@@ -7,6 +7,8 @@ import jsh.project.boardReply.reply.model.dto.response.ResponseReplyDto;
 
 public interface ReplyDao {
 	public List<ResponseReplyDto> selectReplys(int articleId);
+	public int selectGroupCount(int articleId);
+	public int selectGroupOrderCount(int group);
 	public void insertReplys(Reply reply);
 	public void updateReplys(Reply reply);
 	public void deleteReplys(Reply reply);
