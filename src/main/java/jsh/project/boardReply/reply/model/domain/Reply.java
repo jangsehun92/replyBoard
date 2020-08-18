@@ -3,6 +3,8 @@ package jsh.project.boardReply.reply.model.domain;
 import java.util.Date;
 
 import jsh.project.boardReply.reply.model.dto.request.RequestCreateReplyDto;
+import jsh.project.boardReply.reply.model.dto.request.RequestEditReplyDto;
+import jsh.project.boardReply.reply.model.dto.request.RequestRemoveReplyDto;
 
 public class Reply {
 	private int id;
@@ -22,6 +24,15 @@ public class Reply {
 		this.content = dto.getContent();
 		this.enabled = 1;
 		this.regdate = new Date();
+	}
+	
+	public Reply(RequestEditReplyDto dto) {
+		this.id = dto.getId();
+		this.content = dto.getContent();
+	}
+	
+	public Reply(RequestRemoveReplyDto dto) {
+		this.id = dto.getId();
 	}
 
 	public int getId() {

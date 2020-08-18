@@ -61,6 +61,9 @@ public class ResponseReplyDto {
 
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
+		if(enabled == 0) {
+			this.content = "삭제된 댓글입니다.";
+		}
 	}
 
 	public Date getRegdate() {

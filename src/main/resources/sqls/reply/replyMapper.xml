@@ -17,15 +17,16 @@
 		ORDER BY reply_group, reply_group_order
 	</select>
 	
-	<select id="selectGroupCount" parameterType="int">
+	<select id="selectGroupCount" parameterType="int" resultType="int">
 		SELECT 
 			count(DISTINCT reply_group) 
 		FROM 
 			board_reply_table 
-		WHERE article_id = #{articleId};
+		WHERE 
+			article_id = #{articleId}
 	</select>
 	
-	<select id="selectGroupOrderCount" parameterType="int">
+	<select id="selectGroupOrderCount" parameterType="int" resultType="int">
 		SELECT
 			count(id)
 		FROM
@@ -58,12 +59,13 @@
 			id = #{id}
 	</update>
 	
-	<delete id="deleteReply" parameterType="Reply">
-		DELETE
-		FROM
+	<update id="deleteReply" parameterType="Reply">
+		UPDATE
 			board_reply_table
+		SET
+			enabled = 0
 		WHERE
 			id = #{id}
-	</delete>
+	</update>
 
 </mapper>

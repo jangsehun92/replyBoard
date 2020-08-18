@@ -40,14 +40,12 @@ public class ReplyDaoImpl implements ReplyDao{
 
 	@Override
 	public void updateReplys(Reply reply) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("updateReply",reply);
 	}
 
 	@Override
 	public void deleteReplys(Reply reply) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("deleteReply",reply);
 	}
 
 

@@ -42,14 +42,12 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Override
 	public void editReplys(RequestEditReplyDto dto) {
-		// TODO Auto-generated method stub
-		
+		replyDao.updateReplys(dto.toReply());
 	}
 
 	@Override
 	public void removeReplys(RequestRemoveReplyDto dto) {
-		// TODO Auto-generated method stub
-		
+		replyDao.deleteReplys(dto.toReply());
 	}
 
 }

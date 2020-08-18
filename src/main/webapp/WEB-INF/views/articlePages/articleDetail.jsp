@@ -84,26 +84,26 @@ function replyList(id){
 									if(value.enabled != 0){
 										html +=	"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
 														"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
-														"<a onClick='deleteConfirm("+value.id+")'>삭제</a>"+
-												"</div>"+
-														"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
-															"<p id='reply-"+value.id+"' style='margin-left:20px'>"+value.content+"</p>"+
-														"</div>"+
-												"</div>";
+														"<a onClick='deleteConfirm("+value.id+")'>삭제</a>";
 									}
+									html +=	"</div>"+
+												"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
+													"<p id='reply-"+value.id+"' style='margin-left:20px'>"+value.content+"</p>"+
+												"</div>"+
+											"</div>";	
 								}else{
 									html +=	"<span>익명</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
 									if(value.enabled != 0){
 										html +=	"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
 														"<a onClick='replyToReplyForm("+value.replyGroup+")'>답글</a> ᛫ "+
 														"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
-														"<a onClick='deleteConfirm("+value.id+")'>삭제</a>"+
-												"</div>"+
-														"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
-															"<p id='reply-"+value.id+"'>"+value.content+"</p>"+
-														"</div>"+
-												"</div>";
+														"<a onClick='deleteConfirm("+value.id+")'>삭제</a>";
 									}
+									html +=	"</div>"+
+												"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
+													"<p id='reply-"+value.id+"'>"+value.content+"</p>"+
+												"</div>"+
+											"</div>";
 								}
 									
 								html += 
@@ -120,13 +120,13 @@ function replyList(id){
 											"<input type='button' style='width:50%' class='btn btn-primary' value='취소' onclick='replyForm("+value.id+")'>"+
 											"</form>"+
 									"</div>"+
-									"<div id='replyToReplyForm-"+value.id+"' style='display: none;'>"+
-									"<form method='post' action='/reply' onsubmit='return replyToReply("+value.replyGroup+");'>"+
-										"<textarea id='replyToReply-"+value.id+"' name='content' class='form-control z-depth-1' rows='3' maxlength='1000' placeholder='댓글을 입력해주세요.'></textarea>"+
-										"<input type='submit' style='width:50%' class='btn btn-success' value='입력'>"+
-										"<input type='button' style='width:50%' class='btn btn-primary' value='취소' onclick='replyForm("+value.id+")'>"+
-										"</form>"+
-									"</div>"+
+										"<div id='replyToReplyForm-"+value.id+"' style='display: none;'>"+
+										"<form method='post' action='/reply' onsubmit='return replyToReply("+value.id+","+value.replyGroup+");'>"+
+											"<textarea id='replyToReply-"+value.id+"' name='content' class='form-control z-depth-1' rows='3' maxlength='1000' placeholder='답글을 입력해주세요.'></textarea>"+
+											"<input type='submit' style='width:50%' class='btn btn-success' value='입력'>"+
+											"<input type='button' style='width:50%' class='btn btn-primary' value='취소' onclick='replyForm("+value.id+")'>"+
+											"</form>"+
+										"</div>"+
 								"</div>"+
 							"</div>"+
 						"</li>";
@@ -163,7 +163,7 @@ function replyToReplyForm(id){
 	var replyToReplyForm = $("#replyToReplyForm-"+id);
 	
 	$("#replyToReply-"+id).val("");
-	replyForm.hide();
+	replyForm.show();
 	dropdownForm.hide();
 	updateForm.hide();
 	replyToReplyForm.show();
@@ -222,8 +222,8 @@ function replyCreate(){
 }
 
 //대댓글 입력 
-function replyToReply(replyGroup){
-	var content = $("#replyToReplyForm-").val().replace(/\s|/gi,'');
+function replyToReply(id,replyGroup){
+	var content = $("#replyToReply-"+id).val().replace(/\s|/gi,'');
 	
 	if(content==""){
 		alert("댓글을 입력해주세요.");
