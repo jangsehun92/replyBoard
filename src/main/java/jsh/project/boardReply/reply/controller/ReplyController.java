@@ -21,7 +21,7 @@ public class ReplyController {
 	}
 	
 	// Reply List 요청
-	@GetMapping("/reply/{articleId}")
+	@GetMapping("/replys/{articleId}")
 	public ResponseEntity<List<ResponseReplyDto>> replyList(@PathVariable("articleId") int articleId){
 		return new ResponseEntity<List<ResponseReplyDto>>(replyService.getReplys(articleId), HttpStatus.OK);
 	}

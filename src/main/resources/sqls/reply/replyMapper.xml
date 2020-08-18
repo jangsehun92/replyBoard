@@ -4,10 +4,16 @@
 
 	<select id="selectReplys" parameterType="int" resultType="ResponseReplyDto">
 		SELECT 
-			 
+			id,
+			article_id AS articleId,
+			reply_group AS replyGroup,
+			reply_depth AS depth,
+			content,
+			enabled,
+			regdate
 		FROM 
 			board_reply_table 
-		WHERE article_id = 1 
+		WHERE article_id = #{articleId} 
 		ORDER BY reply_group, reply_group_order
 	</select>
 	
