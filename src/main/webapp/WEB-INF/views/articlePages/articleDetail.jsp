@@ -82,36 +82,35 @@ function replyList(id){
 								if(value.depth != 0){
 									html +=	"<span style='margin-left:8px'>ㄴ익명</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
 									if(value.enabled != 0){
-										html +=	"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
-														"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
-														"<a onClick='deleteConfirm("+value.id+")'>삭제</a>";
+										html +=	
+										"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
+											"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
+											"<a onClick='deleteConfirm("+value.id+")'>삭제</a>"+
+										"</div>";
 									}
-									html +=	"</div>"+
-												"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
-													"<p id='reply-"+value.id+"' style='margin-left:20px'>"+value.content+"</p>"+
-												"</div>"+
-											"</div>";	
+									html +=	
+										"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
+											"<p id='reply-"+value.id+"' style='margin-left:20px'>"+value.content+"</p>"+
+										"</div>"+
+									"</div>";	
 								}else{
 									html +=	"<span>익명</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
 									if(value.enabled != 0){
-										html +=	"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
-														"<a onClick='replyToReplyForm("+value.id+")'>답글</a> ᛫ "+
-														"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
-														"<a onClick='deleteConfirm("+value.id+")'>삭제</a>";
+										html +=	
+										"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
+											"<a onClick='replyToReplyForm("+value.id+")'>답글</a> ᛫ "+
+											"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
+											"<a onClick='deleteConfirm("+value.id+")'>삭제</a>"+
+										"</div>";
 									}
-									html +=	"</div>"+
-												"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
-													"<p id='reply-"+value.id+"'>"+value.content+"</p>"+
-												"</div>"+
-											"</div>";
+									html +=	
+										"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
+											"<p id='reply-"+value.id+"'>"+value.content+"</p>"+
+										"</div>"+
+									"</div>";
 								}
 									
 								html += 
-									/* "</div>"+
-											"<div id='replyForm-"+value.id+"' style='white-space : pre-wrap;height: 100%'>"+
-												"<p id='reply-"+value.id+"'>"+value.content+"</p>"+
-											"</div>"+
-									"</div>"+ */
 									"<div id='updateForm-"+value.id+"' style='display: none;'>"+
 										"<form method='post' action='/reply/"+value.id+"' onsubmit='return replyUpdate("+value.id+");'>"+
 											"<input type='hidden' name='_method' value='PUT'>"+
@@ -120,13 +119,13 @@ function replyList(id){
 											"<input type='button' style='width:50%' class='btn btn-primary' value='취소' onclick='replyForm("+value.id+")'>"+
 											"</form>"+
 									"</div>"+
-										"<div id='replyToReplyForm-"+value.id+"' style='display: none;'>"+
+									"<div id='replyToReplyForm-"+value.id+"' style='display: none;'>"+
 										"<form method='post' action='/reply' onsubmit='return replyToReply("+value.id+","+value.replyGroup+");'>"+
 											"<textarea id='replyToReply-"+value.id+"' name='content' class='form-control z-depth-1' rows='3' maxlength='1000' placeholder='답글을 입력해주세요.'></textarea>"+
 											"<input type='submit' style='width:50%' class='btn btn-success' value='입력'>"+
 											"<input type='button' style='width:50%' class='btn btn-primary' value='취소' onclick='replyForm("+value.id+")'>"+
-											"</form>"+
-										"</div>"+
+										"</form>"+
+									"</div>"+
 								"</div>"+
 							"</div>"+
 						"</li>";
@@ -157,7 +156,6 @@ function replyForm(id){
 
 //대댓글 폼 요청
 function replyToReplyForm(id){
-	alert(id);
 	var dropdownForm = $("#dropdownForm-"+id);
 	var replyForm = $("#replyForm-"+id);
 	var updateForm = $("#updateForm-"+id);
