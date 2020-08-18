@@ -95,7 +95,7 @@ function replyList(id){
 									html +=	"<span>익명</span><span class='text-muted'> | <small>"+uxin_timestamp(value.regdate)+" 작성</small></span>";
 									if(value.enabled != 0){
 										html +=	"<div id='dropdownForm-"+value.id+"' style='float: right;'>"+
-														"<a onClick='replyToReplyForm("+value.replyGroup+")'>답글</a> ᛫ "+
+														"<a onClick='replyToReplyForm("+value.id+")'>답글</a> ᛫ "+
 														"<a onClick='replyUpdateForm("+value.id+")'>수정</a> ᛫ "+
 														"<a onClick='deleteConfirm("+value.id+")'>삭제</a>";
 									}
@@ -157,6 +157,7 @@ function replyForm(id){
 
 //대댓글 폼 요청
 function replyToReplyForm(id){
+	alert(id);
 	var dropdownForm = $("#dropdownForm-"+id);
 	var replyForm = $("#replyForm-"+id);
 	var updateForm = $("#updateForm-"+id);
